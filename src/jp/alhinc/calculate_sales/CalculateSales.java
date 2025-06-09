@@ -37,6 +37,13 @@ public class CalculateSales {
 		}
 
 		// ※ここから集計処理を作成してください。(処理内容2-1、2-2)
+		File[] files = new File("C:\\Users\\trainee1436\\Desktop\\売り上げ集計課題").listFiles();
+		for(int i = 0; i < files.length ; i++);{
+			int i = 0;
+			files[i].getName();
+
+		}
+
 
 
 
@@ -67,8 +74,12 @@ public class CalculateSales {
 			String line;
 			// 一行ずつ読み込む
 			while((line = br.readLine()) != null) {
-				// ※ここの読み込み処理を変更してください。(処理内容1-2)
-				System.out.println(line);
+				// ※ここの読み込み処理を変更してください。(処理内容1-2) →済
+				String[] items = line.split(",");
+
+				//Mapに追加する2つの情報をputの引数として指定します。
+				branchNames.put(items[0],items[1]);
+				branchSales.put(items[0],0L);
 			}
 
 		} catch(IOException e) {
