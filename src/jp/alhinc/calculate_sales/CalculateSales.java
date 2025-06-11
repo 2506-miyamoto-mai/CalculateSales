@@ -45,7 +45,7 @@ public class CalculateSales {
 		List<File> rcdFiles = new ArrayList<File>();
 
 		for (int i = 0; i < files.length; i++) {
-			if (files[i].getName().matches("^[0-9]{8}.rcd$")) {
+			if (files[i].getName().matches("^[0-9]{8}[.]rcd$")) {
 				rcdFiles.add(files[i]);
 			}
 		}
@@ -58,22 +58,17 @@ public class CalculateSales {
 				File file = rcdFiles.get(i);
 				FileReader fr = new FileReader(file);
 				br = new BufferedReader(fr);
-
-				//
 				String line;
 
 				List<String> sales = new ArrayList<String>();
-
 				while ((line = br.readLine()) != null) {
 					sales.add(line);
 				}
 
 				//型の変換
 				long fileSale = Long.parseLong(sales.get(1));
-
 				//売上金額を加算
 				Long saleAmount = branchSales.get(sales.get(0)) + fileSale;
-
 				//売上のMapに保持する
 				branchSales.put(sales.get(0), saleAmount);
 
@@ -94,10 +89,10 @@ public class CalculateSales {
 			}
 		}
 
-			// 支店別集計ファイル書き込み処理
-			if (!writeFile(args[0], FILE_NAME_BRANCH_OUT, branchNames, branchSales)) {
-				return;
-			}
+		// 支店別集計ファイル書き込み処理
+		if (!writeFile(args[0], FILE_NAME_BRANCH_OUT, branchNames, branchSales)) {
+			return;
+		}
 	}
 
 	/**
@@ -117,7 +112,6 @@ public class CalculateSales {
 			File file = new File(path, fileName);
 			FileReader fr = new FileReader(file);
 			br = new BufferedReader(fr);
-
 			String line;
 			// 一行ずつ読み込む
 			while ((line = br.readLine()) != null) {
@@ -125,7 +119,6 @@ public class CalculateSales {
 				String[] items = line.split(",");
 
 				//Mapに追加する2つの情報をputの引数として指定します。
-
 				branchNames.put(items[0], items[1]);
 				branchSales.put(items[0], 0L);
 			}
@@ -163,18 +156,14 @@ public class CalculateSales {
 		BufferedWriter bw = null;
 
 		try {
-			File file = new File("C:\\Users\\trainee1436\\Desktop\\売り上げ集計課題\\branch.out");
+			File file = new File(path, fileName);
 
 			FileWriter fw = new FileWriter(file);
 			bw = new BufferedWriter(fw);
 
 			for (String key : branchSales.keySet()) {
-				branchSales.get(key);
-			    branchNames.get(key);
-
-			    bw.write(key + "," + branchNames.get(key)+","+ branchSales.get(key));
-
-			    bw.newLine();
+				bw.write(key + "," + branchNames.get(key) + "," + branchSales.get(key));
+				bw.newLine();
 			}
 
 		} catch (IOException e) {
@@ -192,7 +181,6 @@ public class CalculateSales {
 				}
 			}
 		}
-		;
 		return true;
 	}
 }
