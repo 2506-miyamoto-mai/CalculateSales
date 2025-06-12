@@ -42,7 +42,7 @@ public class CalculateSales {
 
 		//コマンドライン引数が渡されていない場合は、エラーメッセージをコンソールに表示します(エラー処理3-1)
 		if (args.length != 1) {
-			System.err.println("予期せぬエラーが発生しました");
+			System.err.println("UNKNOWN_ERROR");
 		}
 
 		// 支店定義ファイル読み込み処理
@@ -96,14 +96,14 @@ public class CalculateSales {
 
 				//売上ファイルの中身が2行でなかった場合は、エラーメッセージをコンソールに表示します。(エラー処理2-4)
 				if (sales.size() != 2) {
-					System.out.println(file + FILE_INVALID_FORMATE_RCDFILES);
+					System.out.println(file.getName() + FILE_INVALID_FORMATE_RCDFILES);
 					return;
 				}
 
 				/*支店情報を保持しているMapに売上ファイルの支店コードが存在しなかった場合は
 				エラーメッセージをコンソールに表示します。(エラー処理2-3)*/
 				if (!branchNames.containsKey(sales.get(0))) {
-					System.out.println(file + FILE_NOT_STORECODE);
+					System.out.println(file.getName() + FILE_NOT_STORECODE);
 					return;
 				}
 				/*売上ファイルの売上金額が数字ではなかった場合は
@@ -180,7 +180,7 @@ public class CalculateSales {
 				String[] items = line.split(",");
 
 				//エラーメッセージをコンソールに表示します。(エラー処理1）
-				if ((items.length != 2) || (!items[0].matches("\\d{3}"))) {
+				if( items.length != 2 || !items[0].matches("\\d{3}")) {
 					System.out.println(FILE_INVALID_FORMAT);
 					return false;
 				}
