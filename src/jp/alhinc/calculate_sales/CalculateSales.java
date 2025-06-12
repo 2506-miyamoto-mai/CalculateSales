@@ -95,7 +95,7 @@ public class CalculateSales {
 				}
 
 				//売上ファイルの中身が2行でなかった場合は、エラーメッセージをコンソールに表示します。(エラー処理2-4)
-				if (rcdFiles.size() != 2) {
+				if (sales.size() != 2) {
 					System.out.println(file + FILE_INVALID_FORMATE_RCDFILES);
 					return;
 				}
@@ -105,10 +105,6 @@ public class CalculateSales {
 				if (!branchNames.containsKey(sales.get(0))) {
 					System.out.println(file + FILE_NOT_STORECODE);
 					return;
-				}
-				/*売上ファイルの売上金額が数字ではなかった場合は
-				エラーメッセージをコンソールに表示します。(エラー処理3-2)*/
-				if (file.isFile() && !files[i].getName().matches("^[0-9]{8}[.]rcd$")) {
 				}
 				/*売上ファイルの売上金額が数字ではなかった場合は
 				エラーメッセージをコンソールに表示します。(エラー処理3-2)*/
